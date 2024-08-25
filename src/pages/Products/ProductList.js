@@ -6,7 +6,7 @@ export const ProductList = () => {
     const [ path, setPath ] = useState("PopularReads");
     const [ show, setShow ] = useState(false);
     
-    const { data, loading, error } = useFetch(`https://www.googleapis.com/books/v1/volumes?q=${path}&orderBy=relevance&maxResults=30`);
+    const { data, loading, error } = useFetch(`https://www.googleapis.com/books/v1/volumes?q=${path}&orderBy=relevance&maxResults=32`);
     
   return (
     <main>
@@ -23,10 +23,10 @@ export const ProductList = () => {
                 </span>
             </div>
             <div className="flex justify-center my-7 gap-2 text-black dark:text-slate-100">
-                <span onClick={() => setPath("fiction") } className="hover:bg-gray-200 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-grey-200 darK:border-grey-500 text-sm font-semibold">Science Fiction</span>
-                <span onClick={() => setPath("mystery") } className="hover:bg-gray-200 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-grey-200 darK:border-grey-500 text-sm font-semibold">Mystery & Thriller</span>
-                <span onClick={() => setPath("fantasy") } className="hover:bg-gray-200 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-grey-200 darK:border-grey-500 text-sm font-semibold">Fantasy</span>
-                <span onClick={() => setPath("education") } className="hover:bg-gray-200 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-grey-200 darK:border-grey-500 text-sm font-semibold">Educational</span>
+                <span onClick={() => setPath("fiction") } className="hover:bg-gray-200 dark:hover:text-gray-500 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-gray-500 dark:border-grey-100 text-sm font-semibold">Science Fiction</span>
+                <span onClick={() => setPath("mystery") } className="hover:bg-gray-200 dark:hover:text-gray-500 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-gray-500 dark:border-grey-100 text-sm font-semibold">Mystery & Thriller</span>
+                <span onClick={() => setPath("fantasy") } className="hover:bg-gray-200 dark:hover:text-gray-500 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-gray-500 dark:border-grey-100 text-sm font-semibold">Fantasy</span>
+                <span onClick={() => setPath("education") } className="hover:bg-gray-200 dark:hover:text-gray-500 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-gray-500 dark:border-grey-100 text-sm font-semibold">Educational</span>
             </div>
             <div className="flex flex-wrap justify-center gap-2 lg:flex-row">
                 {data && data.map((book, index) => (

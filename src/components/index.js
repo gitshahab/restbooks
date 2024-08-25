@@ -4,3 +4,5 @@ export { ProductCard } from "./Elements/ProductCard";
 export { useFetch } from "./Hooks/useFetch";
 export { Ratings } from "./Elements/Ratings";
 export { LoadingNerror } from "./Elements/LoadingNerror";
+export { ScrollToTop } from "./Other/ScrollToTop";
+export { Search } from "../pages/Home/components/Search";

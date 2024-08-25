@@ -11,7 +11,7 @@ export const ProductCard = ({bookId, data, price}) => {
     const author = data?.authors || "No Author Available";
 
   return (
-    <div className="w-72 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-72 max-w-sm bg-white border border-gray-500 rounded-lg shadow dark:bg-gray-800 dark:border-gray-300">
         <Link to={`/products/product/${bookId}`} className="relative">
             <span className="absolute top-4 left-2 px-2 bg-orange-500 bg-opacity-90 text-white rounded">{priceAmt <= 500 || rating >= 4 ? "Best Seller" : "" }</span>
             <img className="p-8 rounded-t-lg" src={thumbnail} alt={title} />

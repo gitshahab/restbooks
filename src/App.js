@@ -3,7 +3,7 @@ import { AllRoutes } from "./routes/AllRoutes";
 
 export const App = () => {
   return (
-    <div>
+    <div className="dark:bg-dark-bg">
         <Header />
         <AllRoutes />
         <Footer />

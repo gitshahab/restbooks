@@ -12,7 +12,7 @@ export const FeatureProduct = () => {
     if (loadingAtomicHabits || loadingBeingMortal || loadingTheChoice || loadingtheSilentPatient) {
         return (
             <div className="flex flex-col items-center h-screen">
-                <h3 className="text-2xl text-gray-900 dark:text-white my-5">Loading...</h3>
+                <h3 className="text-2xl text-grey-900 dark:text-gray-100 my-5">Loading...</h3>
                 <img className="h-40" src={LoadingImg} alt="Loading.." />
             </div>
         )
@@ -20,7 +20,7 @@ export const FeatureProduct = () => {
     if (errorAtomicHabits || errorBeingMortal || errorTheChoice || errortheSilentPatient) {
         return (
             <div className="flex flex-col items-center h-screen">
-                <h3 className="text-2xl text-red-500 my-5">Something went wrong. Please try again later.</h3>
+                <h3 className="text-2xl text-red-500 my-5 dark:text-gray-100">Something went wrong. Please try again later.</h3>
                 <img src={ErrorImg} alt="error.." />
             </div>
         )
@@ -28,7 +28,7 @@ export const FeatureProduct = () => {
 
   return (
     <section className='my-20'>
-        <h1 className='text-2xl text-center font-semibold dark-slate-100 mb-5 underline underline-offset-8'>Featured eBooks</h1>
+        <h1 className='text-2xl text-center font-semibold dark:text-gray-100 mb-5 underline underline-offset-8'>Featured eBooks</h1>
         <div className='flex flex-wrap lg:flex-row justify-center gap-2'>
             <ProductCard bookId={atomicHabitsData[0]?.id} data={atomicHabitsData[0]?.volumeInfo} price={atomicHabitsData[0]?.saleInfo}/>
             <ProductCard bookId={beingMortalData[0]?.id} data={beingMortalData[0]?.volumeInfo} price={beingMortalData[0]?.saleInfo}/>
