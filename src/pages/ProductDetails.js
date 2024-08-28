@@ -1,4 +1,4 @@
-import { useFetch, LoadingNerror, Ratings} from '../components/index';
+import { useFetch, LoadingNerror, Ratings, useTitle} from '../components/index';
 import { Link, useParams } from "react-router-dom";
 import DefaultCover from "../assets/default-cover.webp";
 
@@ -17,6 +17,8 @@ export const ProductDetails = () => {
     const date = volumeInfo?.publishedDate || "";
     const author = volumeInfo?.authors || "No Author Available"
     const category = volumeInfo?.categories || "";
+
+    useTitle(`${title}`);
 
   return (
     <main>

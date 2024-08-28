@@ -1,12 +1,25 @@
-import { LoadingNerror, ProductCard, useFetch } from "../../components/index";
+import { LoadingNerror, ProductCard, useFetch, useTitle } from "../../components/index";
 import { FilterBar } from "./components/FilterBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useFilter } from "../../context";
 
 export const ProductList = () => {
+    const { products, initialProductList} = useFilter();
+    
     const [ path, setPath ] = useState("PopularReads");
     const [ show, setShow ] = useState(false);
     
-    const { data, loading, error } = useFetch(`https://www.googleapis.com/books/v1/volumes?q=${path}&orderBy=relevance&maxResults=32`);
+    const { data, loading, error } = useFetch(`https://www.googleapis.com/books/v1/volumes?q=${path}&orderBy=relevance&maxResults=40`);
+    
+    useTitle("Explore eBooks");
+
+    useEffect(() => {
+        if (data) {
+            initialProductList(data);
+        }
+    }, [data, initialProductList]);
+
+    const limitedProducts = products.slice(0, 32);
     
   return (
     <main>
@@ -29,7 +42,7 @@ export const ProductList = () => {
                 <span onClick={() => setPath("education") } className="hover:bg-gray-200 dark:hover:text-gray-500 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-gray-500 dark:border-grey-100 text-sm font-semibold">Educational</span>
             </div>
             <div className="flex flex-wrap justify-center gap-2 lg:flex-row">
-                {data && data.map((book, index) => (
+                {limitedProducts && limitedProducts.map((book, index) => (
                 <ProductCard key={index} bookId={book?.id} data={book.volumeInfo} price={book.saleInfo}/>
                 ))}
             </div>

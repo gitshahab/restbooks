@@ -20,7 +20,7 @@ export const FeatureProduct = () => {
     if (errorAtomicHabits || errorBeingMortal || errorTheChoice || errortheSilentPatient) {
         return (
             <div className="flex flex-col items-center h-screen">
-                <h3 className="text-2xl text-red-500 my-5 dark:text-gray-100">Something went wrong. Please try again later.</h3>
+                <h3 className="text-2xl text-red-500 my-5">Something went wrong. Please try again later.</h3>
                 <img src={ErrorImg} alt="error.." />
             </div>
         )

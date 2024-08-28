@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom'
-import { useFetch, LoadingNerror, ProductCard } from '../../../components/index';
+import { useFetch, LoadingNerror, ProductCard, useTitle } from '../../../components/index';
 import { useEffect, useState } from 'react';
 
 export const Search = () => {
@@ -8,6 +8,7 @@ export const Search = () => {
     const [ processedQuery, setProcessedQuery ] = useState(query.toLowerCase().replace(/\s+/g, ''));
 
     const { data, error, loading } = useFetch(`https://www.googleapis.com/books/v1/volumes?q=${processedQuery}&orderBy=relevance&maxResults=12`);
+    useTitle(`${query}`);
 
     useEffect(() => {
         setProcessedQuery(query.toLowerCase().replace(/\s+/g, ''));
