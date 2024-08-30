@@ -7,3 +7,5 @@ export { LoadingNerror } from "./Elements/LoadingNerror";
 export { ScrollToTop } from "./Other/ScrollToTop";
 export { Search } from "../pages/Home/components/Search";
 export { useTitle } from "./Hooks/useTitle";
+export { DropDownLoggedIn } from "./Elements/DropDownLoggedIn";
+export { DropDownLoggedOut } from "./Elements/DropDownLoggedOut";

@@ -2,11 +2,14 @@ import { Link } from "react-router-dom";
 import Logo from "../../assets/restbooksLogo.png";
 import { useEffect, useState } from "react";
 import { SearchForm } from "../Elements/SearchForm";
+import { DropDownLoggedOut, DropDownLoggedIn } from "../index";
 
 export const Header = () => {
     const [ dark, setDark ] = useState(JSON.parse(localStorage.getItem("darkMode")) || false);
     const [ searchBar, setSearchBar ] = useState(false);
-    
+    const [ dropdown, setDropdown ] = useState(false);
+    const token = sessionStorage.getItem("token");
+
     useEffect(() => {
         localStorage.setItem("darkMode", JSON.stringify(dark));
         if(dark) {
@@ -36,7 +39,8 @@ export const Header = () => {
                         </span>
                     </Link>
                     
-                    <span className="bi bi-person-circle cursor-pointer text-base lg:text-xl text-grey-700 dark:text-white"></span>
+                    <span onClick={() => setDropdown(!dropdown)} className="bi bi-person-circle cursor-pointer text-base lg:text-xl text-grey-700 dark:text-white"></span>
+                    {dropdown && (token ? <DropDownLoggedIn setDropdown={setDropdown}/>:<DropDownLoggedOut setDropdown={setDropdown} />)}
                 </div>
             </div>
         </nav>
