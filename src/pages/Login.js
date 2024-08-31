@@ -35,7 +35,7 @@ export const Login = () => {
             } else { 
                 const user = resp[0];
                 if (user.password === password.current.value ){
-                    toast.success("Login successful");
+                    toast.success("Logged in successfully!");
                     sessionStorage.setItem("token", email.current.value);
                     navigate("/products");
                 } else {

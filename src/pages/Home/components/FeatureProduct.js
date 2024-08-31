@@ -30,10 +30,10 @@ export const FeatureProduct = () => {
     <section className='my-20'>
         <h1 className='text-2xl text-center font-semibold dark:text-gray-100 mb-5 underline underline-offset-8'>Featured eBooks</h1>
         <div className='flex flex-wrap lg:flex-row justify-center gap-2'>
-            <ProductCard bookId={atomicHabitsData[0]?.id} data={atomicHabitsData[0]?.volumeInfo} price={atomicHabitsData[0]?.saleInfo}/>
-            <ProductCard bookId={beingMortalData[0]?.id} data={beingMortalData[0]?.volumeInfo} price={beingMortalData[0]?.saleInfo}/>
-            <ProductCard bookId={theSilentPatient[0]?.id} data={theSilentPatient[0]?.volumeInfo} price={theSilentPatient[0]?.saleInfo}/>
-            <ProductCard bookId={theChoiceData[0]?.id} data={theChoiceData[0]?.volumeInfo} price={theChoiceData[0]?.saleInfo}/>
+            <ProductCard data={atomicHabitsData[0]?.volumeInfo} price={atomicHabitsData[0]?.saleInfo} fullData={atomicHabitsData[0]} />
+            <ProductCard data={beingMortalData[0]?.volumeInfo} price={beingMortalData[0]?.saleInfo} fullData={beingMortalData[0]} />
+            <ProductCard data={theSilentPatient[0]?.volumeInfo} price={theSilentPatient[0]?.saleInfo} fullData={theSilentPatient[0]} />
+            <ProductCard data={theChoiceData[0]?.volumeInfo} price={theChoiceData[0]?.saleInfo} fullData={theChoiceData[0]} />
         </div>
     </section>
   )

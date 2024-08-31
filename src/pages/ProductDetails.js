@@ -1,6 +1,8 @@
 import { useFetch, LoadingNerror, Ratings, useTitle} from '../components/index';
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import DefaultCover from "../assets/default-cover.webp";
+import { useCart } from '../context';
+import { useState, useEffect } from 'react';
 
 export const ProductDetails = () => {
     const { id } = useParams();
@@ -17,6 +19,17 @@ export const ProductDetails = () => {
     const date = volumeInfo?.publishedDate || "";
     const author = volumeInfo?.authors || "No Author Available"
     const category = volumeInfo?.categories || "";
+
+    const { addToCart, removeCart, cartList } = useCart();
+    const [ incart, setIncart ] = useState(false);
+
+    useEffect(() => {
+        if (item) {
+            const productIncart = cartList.find( cartItem => cartItem.id === item.id );
+            setIncart(!!productIncart);
+        }
+
+    }, [cartList, item])
 
     useTitle(`${title}`);
 
@@ -44,7 +57,8 @@ export const ProductDetails = () => {
                     <p className='text-gray-700 dark:text-gray-300'>{subtitle}</p>
                     <div className='flex gap-5 items-center'>
                         <span className={`${ priceAmt !== "Out Of Stock"? 'bi bi-currency-rupee text-3xl' : 'bi bi-cart-x text-xl'} my-5 font-bold text-gray-900 dark:text-white`}>{priceAmt}</span>
-                        <Link to="#" className="my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</Link>
+                        {!incart && <span onClick={() => addToCart(item)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hover:cursor-pointer">Add to cart</span>}
+                        {incart && <span onClick={() => removeCart(item)} className="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 hover:cursor-pointer">Remove</span>}
                     </div>
                 </div>
             </div>)}

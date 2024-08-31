@@ -5,7 +5,8 @@ import { useFilter } from "../../context";
 
 export const ProductList = () => {
     const { products, initialProductList} = useFilter();
-    
+    const [ active, setActive ] = useState(null);
+
     const [ path, setPath ] = useState("PopularReads");
     const [ show, setShow ] = useState(false);
     
@@ -20,6 +21,10 @@ export const ProductList = () => {
     }, [data, initialProductList]);
 
     const limitedProducts = products.slice(0, 32);
+
+    const handleActive = (category) => {
+        setActive(category);
+    }
     
   return (
     <main>
@@ -35,15 +40,15 @@ export const ProductList = () => {
                     </button>
                 </span>
             </div>
-            <div className="flex justify-center my-7 gap-2 text-black dark:text-slate-100">
-                <span onClick={() => setPath("fiction") } className="hover:bg-gray-200 dark:hover:text-gray-500 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-gray-500 dark:border-grey-100 text-sm font-semibold">Science Fiction</span>
-                <span onClick={() => setPath("mystery") } className="hover:bg-gray-200 dark:hover:text-gray-500 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-gray-500 dark:border-grey-100 text-sm font-semibold">Mystery & Thriller</span>
-                <span onClick={() => setPath("fantasy") } className="hover:bg-gray-200 dark:hover:text-gray-500 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-gray-500 dark:border-grey-100 text-sm font-semibold">Fantasy</span>
-                <span onClick={() => setPath("education") } className="hover:bg-gray-200 dark:hover:text-gray-500 hover:cursor-pointer px-2 py-4 rounded-lg bg-dark-primay border border-gray-500 dark:border-grey-100 text-sm font-semibold">Educational</span>
+            <div className="flex justify-center my-7 gap-2 md:gap-4 text-black dark:text-slate-100">
+                <span onClick={() => {setPath("fiction"); handleActive("fiction");} } className={`${active === "fiction" ? `bg-black text-white dark:bg-white dark:text-black`: "" } hover:cursor-pointer px-2 py-4 rounded-full border border-gray-500 dark:border-grey-100 text-base font-semibold md:w-24 text-center`}>Fiction</span>
+                <span onClick={() => {setPath("mystery"); handleActive("mystery");} } className={`${active === "mystery" ? `bg-black text-white dark:bg-white dark:text-black`: "" } hover:cursor-pointer px-2 py-4 rounded-full border border-gray-500 dark:border-grey-100 text-base font-semibold  md:w-24 text-center`}>Mystery</span>
+                <span onClick={() => {setPath("fantasy"); handleActive("fantasy");} } className={`${active === "fantasy" ? `bg-black text-white dark:bg-white dark:text-black`: "" } hover:cursor-pointer px-2 py-4 rounded-full border border-gray-500 dark:border-grey-100 text-base font-semibold  md:w-24 text-center`}>Fantasy</span>
+                <span onClick={() => {setPath("education"); handleActive("education");} } className={`${active === "education" ? `bg-black text-white dark:bg-white dark:text-black`: "" } hover:cursor-pointer px-2 py-4 rounded-full border border-gray-500 dark:border-grey-100 text-base font-semibold  md:w-24 text-center`}>Education</span>
             </div>
             <div className="flex flex-wrap justify-center gap-2 lg:flex-row">
                 {limitedProducts && limitedProducts.map((book, index) => (
-                <ProductCard key={index} bookId={book?.id} data={book.volumeInfo} price={book.saleInfo}/>
+                <ProductCard key={index} data={book.volumeInfo} price={book.saleInfo} fullData={book} />
                 ))}
             </div>
         </section>)}

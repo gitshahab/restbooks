@@ -5,3 +5,4 @@ export { Search } from "./Home/components/Search";
 export { FilterBar } from "./Products/components/FilterBar";
 export { Login } from "./Login";
 export { Register } from "./Register";
+export { CartPage } from "./Cart/CartPage";

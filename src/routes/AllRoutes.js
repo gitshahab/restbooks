@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { HomePage, Login, ProductDetails, ProductList, Register, Search } from "../pages/index";
+import { CartPage, HomePage, Login, ProductDetails, ProductList, Register, Search } from "../pages/index";
 
 export const AllRoutes = () => {
     return (
@@ -11,6 +11,7 @@ export const AllRoutes = () => {
             <Route path="/search" element={<Search />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/cartpage" element={<CartPage />} />
         </Routes>
         </>
     );
