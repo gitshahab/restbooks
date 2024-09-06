@@ -28,8 +28,7 @@ export const ProductList = () => {
     
   return (
     <main>
-        <LoadingNerror loading={loading} error={error} />
-        {!loading && !error && (<section className="my-5">
+        <section className="my-5">
             <div className="my-5 flex justify-between">
                 <span className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Genres..</span>
                 <span>
@@ -46,6 +45,9 @@ export const ProductList = () => {
                 <span onClick={() => {setPath("fantasy"); handleActive("fantasy");} } className={`${active === "fantasy" ? `bg-black text-white dark:bg-white dark:text-black`: "" } hover:cursor-pointer px-2 py-4 rounded-full border border-gray-500 dark:border-grey-100 text-base font-semibold  md:w-24 text-center`}>Fantasy</span>
                 <span onClick={() => {setPath("education"); handleActive("education");} } className={`${active === "education" ? `bg-black text-white dark:bg-white dark:text-black`: "" } hover:cursor-pointer px-2 py-4 rounded-full border border-gray-500 dark:border-grey-100 text-base font-semibold  md:w-24 text-center`}>Education</span>
             </div>
+        </section>
+        <LoadingNerror loading={loading} error={error} />
+        {!loading && !error && (<section>
             <div className="flex flex-wrap justify-center gap-2 lg:flex-row">
                 {limitedProducts && limitedProducts.map((book, index) => (
                 <ProductCard key={index} data={book.volumeInfo} price={book.saleInfo} fullData={book} />

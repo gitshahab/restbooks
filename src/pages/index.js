@@ -6,3 +6,4 @@ export { FilterBar } from "./Products/components/FilterBar";
 export { Login } from "./Login";
 export { Register } from "./Register";
 export { CartPage } from "./Cart/CartPage";
+export { OrderPage } from "./Orders/OrderPage";

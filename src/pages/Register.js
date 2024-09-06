@@ -30,6 +30,7 @@ export const Register = () => {
         return isProceed;
     }
 
+
     async function handleRegister(event) {
         event.preventDefault();
         const authDetail = {
@@ -38,40 +39,35 @@ export const Register = () => {
           password: event.target.password.value
         };
 
-        // try {
-        //     const response = await fetch("http://localhost:8000/register", {
-        //       method: "POST",
-        //       headers: { "Content-Type": "application/json" },
-        //       body: JSON.stringify(authDetail)
-        //     });
-        
-        //     if (response.ok) {
-        //       const data = await response.json();
-        //       if (data.accessToken) {
-        //         navigate("/products");
-        //       } else {
-        //         toast.error(data);
-        //       }
-        //       console.log(data);
-        //     } else {
-        //       console.error(`Registration failed with status ${response.status}`);
-        //     }
-        //   } catch (error) {
-        //     console.error("Error registering user:", error);
-        // }
-        if (IsValidate(event)){
-        fetch("http://localhost:8000/users", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(authDetail)
-        }).then((res) => {
-            toast.success("Registered successfully");
-            sessionStorage.setItem("token", event.target.email.value);
-            navigate("/products")
-        }).catch((err) => {
-            toast.err(`Failed : ${err.message}`);
-        });
+        if (!IsValidate(event)) {
+            return;
         }
+
+        try{
+            const registerResponse = await fetch("http://localhost:8000/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(authDetail)
+            });
+
+            if(registerResponse.status === 400){
+                toast.warning("Email Already Exits");
+                toast.success("Please Sign in to your account");
+                navigate("/login");
+            }
+
+            if (registerResponse.ok) {
+                const data = await registerResponse.json();
+                toast.success("Registered successfully");
+                sessionStorage.setItem("token", JSON.stringify(data.accessToken));
+                sessionStorage.setItem("email", event.target.email.value);
+                sessionStorage.setItem("userId", JSON.stringify(data.user.id));
+                navigate("/products");
+            }              
+        } catch (err) {
+            toast.error(`Failed : ${err.message}`);
+        }
+                    
     }
 
   return (

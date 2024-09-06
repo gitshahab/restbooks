@@ -3,10 +3,10 @@ import { toast } from 'react-toastify';
 
 export const DropDownLoggedIn = ({setDropdown}) => {
     const navigate = useNavigate();
-    const email = sessionStorage.getItem("token");
+    const email = sessionStorage.getItem("email");
     
     const handleSignOut = () => {
-        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("email");
         toast.success("Signed out successfully!");
         navigate("/");
         setDropdown(false);

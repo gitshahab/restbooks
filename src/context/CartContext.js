@@ -40,22 +40,22 @@ export const CartProvider = ({children}) => {
         })
     }
 
-    // function clearCart(product){
-    //     dispatch({
-    //         type: "CLEAR_CART",
-    //         payload: {
-    //             products: [],
-    //             total: 0
-    //         }
-    //     })
-    // }
+    function clearCart(product){
+        dispatch({
+            type: "CLEAR_CART",
+            payload: {
+                products: [],
+                total: 0
+            }
+        })
+    }
 
     const value = {
         cartList: state.cartList,
         total: state.total,
         addToCart,
-        removeCart
-        // clearCart
+        removeCart,
+        clearCart
     }
     
     return (

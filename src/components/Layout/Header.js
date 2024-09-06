@@ -12,7 +12,7 @@ export const Header = () => {
     const [ dropdown, setDropdown ] = useState(false);
     const [ active, setActive ] = useState(null);
     const location = useLocation();
-    const token = sessionStorage.getItem("token");
+    const email = sessionStorage.getItem("email");
 
     useEffect(() => {
         localStorage.setItem("darkMode", JSON.stringify(dark));
@@ -48,7 +48,7 @@ export const Header = () => {
                     </Link>
                     
                     <span onClick={() => {setDropdown(!dropdown); handleActive("person");}} className={`${active === "person" && dropdown ? "text-gray-900 dark:text-white" : ""} bi bi-person-circle cursor-pointer text-base lg:text-xl text-gray-400`}></span>
-                    {dropdown && (token ? <DropDownLoggedIn setDropdown={setDropdown}/>:<DropDownLoggedOut setDropdown={setDropdown} />)}
+                    {dropdown && (email ? <DropDownLoggedIn setDropdown={setDropdown}/>:<DropDownLoggedOut setDropdown={setDropdown} />)}
                 </div>
             </div>
         </nav>

@@ -22,44 +22,33 @@ export const Login = () => {
 
     async function handleLogin(event){
         event.preventDefault();
-        // const authDetail = {
-        //     email: email.current.value,
-        //     password: password.current.value
-        // }
-    if(validate()){
-        fetch(`http://localhost:8000/users?email=${encodeURIComponent(email.current.value)}`).then((res) => {
-            return res.json();
-        }).then((resp) => {
-            if(resp.length === 0){
-                toast.error("Please Enter a valid email")
-            } else { 
-                const user = resp[0];
-                if (user.password === password.current.value ){
+
+        const authDetail = {
+            email: email.current.value,
+            password: password.current.value
+        }
+
+        if(validate()){
+            try {
+                const response = await fetch(`http://localhost:8000/login`, {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(authDetail)
+                });
+                const resp = await response.json();
+                if (resp.accessToken) {
                     toast.success("Logged in successfully!");
-                    sessionStorage.setItem("token", email.current.value);
+                    sessionStorage.setItem("token", JSON.stringify(resp.accessToken));
+                    sessionStorage.setItem("email", email.current.value);
+                    sessionStorage.setItem("userId", JSON.stringify(resp.user.id));
                     navigate("/products");
                 } else {
                     toast.error("Please Enter a valid credentials");
-                }    
+                }
+            } catch (err) {
+                toast.error(`Login Failed ${err.message}`);
             }
-            
-        }).catch((err) => {
-            toast.error(`Login Failed ${err.message}`);
-        })
-    }
-
-
-        // const response = await fetch("http://localhost:8000/users", {
-        //     method: "POST",
-        //     headers: {"content-Type": "application/json"},
-        //     body: JSON.stringify(authDetail)
-        // })
-
-        // const data = await response.json();
-        // data.accessToken ? navigate("/products") : toast.error(data);
-        // console.log(data);
-        
-        
+        }   
     }
   return (
     <main>

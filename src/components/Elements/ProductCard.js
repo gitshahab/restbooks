@@ -16,7 +16,7 @@ export const ProductCard = ({data, price, fullData}) => {
     const [ incart, setIncart ] = useState(false);
 
     useEffect(() => {
-        const productIncart = cartList.find( item => item.id === fullData.id );
+        const productIncart = cartList.find( item => item.id === fullData?.id );
         setIncart(!!productIncart);
     }, [cartList, fullData])
 
@@ -43,8 +43,8 @@ export const ProductCard = ({data, price, fullData}) => {
             </div>
             <div className="flex items-center justify-between">
                 <span className={`${ priceAmt !== "Out Of Stock"? 'bi bi-currency-rupee text-3xl' : 'bi bi-cart-x text-xl'} my-2  font-bold text-gray-900 dark:text-white`}>{priceAmt}</span>
-                {!incart && <span onClick={() => addToCart(fullData)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hover:cursor-pointer">Add to cart</span>}
-                {incart && <span onClick={() => removeCart(fullData)} className="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 hover:cursor-pointer">Remove</span>}
+                {!incart && <span onClick={() => addToCart(fullData)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hover:cursor-pointer">Add <i className="bi bi-cart-check"></i></span>}
+                {incart && <span onClick={() => removeCart(fullData)} className="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 hover:cursor-pointer">Remove <i className="bi bi-cart-x"></i></span>}
             </div>
         </div>
     </div>

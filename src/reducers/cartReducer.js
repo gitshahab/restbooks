@@ -9,7 +9,7 @@ export const cartReducer = (state, action) => {
     case "REMOVE_CART":
         return {...state, cartList: payload.products, total: payload.total}
     case "CLEAR_CART":
-        return {...state, cartList: [], total: 0}
+        return {...state, cartList: payload.products, total: payload.total}
     default:
         throw new Error("No case found!");
     }
