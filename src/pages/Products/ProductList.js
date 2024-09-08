@@ -10,7 +10,7 @@ export const ProductList = () => {
     const [ path, setPath ] = useState("PopularReads");
     const [ show, setShow ] = useState(false);
     
-    const { data, loading, error } = useFetch(`https://www.googleapis.com/books/v1/volumes?q=${path}&orderBy=relevance&maxResults=40`);
+    const { data, loading, error } = useFetch(`${process.env.REACT_APP_API}?q=${path}&orderBy=relevance&maxResults=40`);
     
     useTitle("Explore eBooks");
 

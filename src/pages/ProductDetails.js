@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 export const ProductDetails = () => {
     const { id } = useParams();
-    const { data, error, loading } = useFetch(`https://www.googleapis.com/books/v1/volumes?q=${id}&orderBy=relevance&maxResults=1`);
+    const { data, error, loading } = useFetch(`${process.env.REACT_APP_API}?q=${id}&orderBy=relevance&maxResults=1`);
 
     const item = data?.[0];
     const volumeInfo = item?.volumeInfo;

@@ -1,8 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { register } from "../services";
+import { useTitle } from "../components";
 
 export const Register = () => {
     const navigate = useNavigate();
+    useTitle("Register");
 
     const IsValidate = (event) => {
         let isProceed = true;
@@ -44,28 +47,17 @@ export const Register = () => {
         }
 
         try{
-            const registerResponse = await fetch("http://localhost:8000/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(authDetail)
-            });
-
-            if(registerResponse.status === 400){
+            const data = await register(authDetail);
+            if(data.status === 400){
                 toast.warning("Email Already Exits");
                 toast.success("Please Sign in to your account");
                 navigate("/login");
-            }
-
-            if (registerResponse.ok) {
-                const data = await registerResponse.json();
+            } else if(data.ok){
                 toast.success("Registered successfully");
-                sessionStorage.setItem("token", JSON.stringify(data.accessToken));
-                sessionStorage.setItem("email", event.target.email.value);
-                sessionStorage.setItem("userId", JSON.stringify(data.user.id));
                 navigate("/products");
-            }              
+            }
         } catch (err) {
-            toast.error(`Failed : ${err.message}`);
+            toast.error(`Something went wrong : ${err.message}`)
         }
                     
     }

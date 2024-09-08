@@ -1,11 +1,14 @@
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { login } from "../services";
+import { useTitle } from "../components";
 
 export const Login = () => {
     const email = useRef();
     const password =useRef();
     const navigate = useNavigate();
+    useTitle("SignIn");
 
     const validate = () => {
         let result = true;
@@ -27,28 +30,14 @@ export const Login = () => {
             email: email.current.value,
             password: password.current.value
         }
-
-        if(validate()){
-            try {
-                const response = await fetch(`http://localhost:8000/login`, {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"},
-                    body: JSON.stringify(authDetail)
-                });
-                const resp = await response.json();
-                if (resp.accessToken) {
-                    toast.success("Logged in successfully!");
-                    sessionStorage.setItem("token", JSON.stringify(resp.accessToken));
-                    sessionStorage.setItem("email", email.current.value);
-                    sessionStorage.setItem("userId", JSON.stringify(resp.user.id));
-                    navigate("/products");
-                } else {
-                    toast.error("Please Enter a valid credentials");
-                }
-            } catch (err) {
-                toast.error(`Login Failed ${err.message}`);
-            }
-        }   
+        
+        try{
+            const data = await login(authDetail, validate);
+            data.accessToken && navigate("/products");
+        } catch (err) {
+            toast.error(`Something went wrong : ${err.message}`);
+        }
+        
     }
   return (
     <main>

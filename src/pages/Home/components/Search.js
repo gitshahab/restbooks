@@ -7,7 +7,7 @@ export const Search = () => {
     const query = searchParams.get("q") || "fiction";
     const [ processedQuery, setProcessedQuery ] = useState(query.toLowerCase().replace(/\s+/g, ''));
 
-    const { data, error, loading } = useFetch(`https://www.googleapis.com/books/v1/volumes?q=${processedQuery}&orderBy=relevance&maxResults=12`);
+    const { data, error, loading } = useFetch(`${process.env.REACT_APP_API}?q=${processedQuery}&orderBy=relevance&maxResults=12`);
     useTitle(`${query}`);
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export const Search = () => {
             <h1 className='text-2xl text-center font-semibold dark:text-gray-100 mb-5 underline underline-offset-8'>{query !== "fiction" ? `Result's for '${query}'` : "Default Result's"}</h1>
             <div className='flex flex-wrap lg:flex-row justify-center gap-2'>
                 {data && data.map((book, index) => (
-                    <ProductCard key={index} bookId={book?.id} data={book.volumeInfo} price={book.saleInfo}/>
+                    <ProductCard key={index} bookId={book?.id} data={book?.volumeInfo} price={book?.saleInfo} fullData={book}/>
                 ))}
             </div>
         </section>
